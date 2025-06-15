@@ -5,16 +5,22 @@
 
 ## Структура проекта
 ```
-├── dist/                 # Файлы банковского приложения
-├── FIRST.md             # Ручные тест-кейсы (Миронов Э.А.)
-├── SECOND.md            # Ручные тест-кейсы (Самелюк Ю.Д.)  
-├── THIRD.md             # Ручные тест-кейсы (Ягунов Д.А.)
-├── first_test.py        # Автотесты Самелюка для TC-001-005 Миронова
-├── second_test.py       # Автотесты Ягунова для TC-006-010 Самелюка
-├── third_test.py        # Автотесты Миронова для TC-011-015 Ягунова
-├── requirements.txt     # Зависимости Python
-├── .github/workflows/   # GitHub Actions CI
-└── README.md           # Данный файл
+├── assets/                    # Статические ресурсы проекта
+│   ├── index.html            # Главная страница приложения
+│   └── vite.svg              # Логотип Vite
+├── tests/                    # Тесты проекта
+│   ├── manual/              # Ручные тест-кейсы
+│   │   ├── FIRST.md        # Тест-кейсы Миронова Э.А.
+│   │   ├── SECOND.md       # Тест-кейсы Самелюка Ю.Д.
+│   │   └── THIRD.md        # Тест-кейсы Ягунова Д.А.
+│   └── automated/          # Автоматизированные тесты
+│       ├── first_test.py   # Автотесты Самелюка для TC-001-005
+│       ├── second_test.py  # Автотесты Ягунова для TC-006-010
+│       └── third_test.py   # Автотесты Миронова для TC-011-015
+├── .github/                 # GitHub Actions CI
+├── venv/                    # Виртуальное окружение Python
+├── requirements.txt         # Зависимости Python
+└── .gitignore              # Игнорируемые Git файлы
 ```
 
 ## Запуск локально
@@ -26,26 +32,26 @@ pip install -r requirements.txt
 
 ### 2. Запуск HTTP-сервера
 ```bash
-cd dist
+cd assets
 python3 -m http.server 8000
 ```
 
 ### 3. Запуск автоматизированных тестов
 ```bash
 # Запуск всех тестов
-python -m pytest first_test.py second_test.py third_test.py -v
+python -m pytest tests/automated/*.py -v
 
-# Запуск тестов отдельно по участникам (автоматизация чужих тест-кейсов)
-python -m pytest first_test.py -v    # Самелюк Ю.Д. автоматизирует TC-001-005 (Миронова)
-python -m pytest second_test.py -v   # Ягунов Д.А. автоматизирует TC-006-010 (Самелюка)
-python -m pytest third_test.py -v    # Миронов Э.А. автоматизирует TC-011-015 (Ягунова)
+# Запуск тестов отдельно по участникам
+python -m pytest tests/automated/first_test.py -v    # Самелюк Ю.Д. автоматизирует TC-001-005 (Миронова)
+python -m pytest tests/automated/second_test.py -v   # Ягунов Д.А. автоматизирует TC-006-010 (Самелюка)
+python -m pytest tests/automated/third_test.py -v    # Миронов Э.А. автоматизирует TC-011-015 (Ягунова)
 ```
 
 ### 4. Ручное тестирование
 Откройте браузер и перейдите по ссылке:
 http://localhost:8000/?balance=30000&reserved=20001
 
-Выполните тест-кейсы из соответствующих файлов:
+Выполните тест-кейсы из соответствующих файлов в директории `tests/manual/`:
 - `FIRST.md` - Миронов Э.А.: Основная функциональность (TC-001 до TC-005)
 - `SECOND.md` - Самелюк Ю.Д.: Граничные значения и валидация (TC-006 до TC-010)
 - `THIRD.md` - Ягунов Д.А.: UI/UX и безопасность (TC-011 до TC-015)
