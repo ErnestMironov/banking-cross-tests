@@ -21,7 +21,7 @@
 │   └── automated/                # Автоматизированные тесты
 │       ├── first_test.py         # Автотесты Самелюка для TC-001-005
 │       ├── second_test.py        # Автотесты Ягунова для TC-006-010
-│       └── third_test.py         # Автотесты Миронова для TC-011-015
+│       └── third_test.py         # Автотесты Миронова для TC-011-016
 ├── .github/                      # GitHub Actions CI
 ├── venv/                         # Виртуальное окружение Python
 ├── requirements.txt              # Зависимости Python
@@ -52,7 +52,7 @@ python -m pytest tests/automated/*.py -v
 # Запуск тестов отдельно по участникам
 python -m pytest tests/automated/first_test.py -v    # Самелюк Ю.Д. автоматизирует TC-001-005 (Миронова)
 python -m pytest tests/automated/second_test.py -v   # Ягунов Д.А. автоматизирует TC-006-010 (Самелюка)
-python -m pytest tests/automated/third_test.py -v    # Миронов Э.А. автоматизирует TC-011-015 (Ягунова)
+python -m pytest tests/automated/third_test.py -v    # Миронов Э.А. автоматизирует TC-011-016 (Ягунова)
 ```
 
 ### 4. Ручное тестирование
@@ -64,13 +64,13 @@ http://localhost:8000/?balance=30000&reserved=20001
 
 - `FIRST.md` - Миронов Э.А.: Основная функциональность (TC-001 до TC-005)
 - `SECOND.md` - Самелюк Ю.Д.: Граничные значения и валидация (TC-006 до TC-010)
-- `THIRD.md` - Ягунов Д.А.: UI/UX и безопасность (TC-011 до TC-015)
+- `THIRD.md` - Ягунов Д.А.: UI/UX банковского приложения (TC-011 до TC-016)
 
 **Схема обмена тест-кейсами для автоматизации:**
 
 - Самелюк → автоматизирует тест-кейсы Миронова (TC-001-005) в `tests/automated/first_test.py`
 - Ягунов → автоматизирует тест-кейсы Самелюка (TC-006-010) в `tests/automated/second_test.py`
-- Миронов → автоматизирует тест-кейсы Ягунова (TC-011-015) в `tests/automated/third_test.py`
+- Миронов → автоматизирует тест-кейсы Ягунова (TC-011-016) в `tests/automated/third_test.py`
 
 ## GitHub CI
 
