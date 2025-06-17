@@ -95,6 +95,7 @@ class BankServiceBoundaryTests(unittest.TestCase):
         except Exception as e:
             self.fail(f"Boundary balance values test failed: {str(e)}")
 
+
     @pytest.mark.xfail(reason="Известный баг: валидация параметра balance некорректно работает для огромных значений")
     def test_06_incorrect_boundary_balance_value_more_then_max(self):
         try:
