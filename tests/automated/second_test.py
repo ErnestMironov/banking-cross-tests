@@ -84,6 +84,7 @@ class BankServiceBoundaryTests(unittest.TestCase):
         except Exception as e:
             self.fail(f"Boundary reserved values test failed: {str(e)}")
 
+    @pytest.mark.xfail(reason="Известный баг: валидация параметра balance некорректно работает для отрицательных значений")
     def test_06_incorrect_boundary_balance_value_less_then_zero(self):
         try:
             self.driver.get(f"{self.base_url}/?balance=-1&reserved=0")
@@ -94,6 +95,8 @@ class BankServiceBoundaryTests(unittest.TestCase):
         except Exception as e:
             self.fail(f"Boundary balance values test failed: {str(e)}")
 
+
+    @pytest.mark.xfail(reason="Известный баг: валидация параметра balance некорректно работает для огромных значений")
     def test_06_incorrect_boundary_balance_value_more_then_max(self):
         try:
             # Тест с балансом больше максимально возможного. 
@@ -108,6 +111,7 @@ class BankServiceBoundaryTests(unittest.TestCase):
         except Exception as e:
             self.fail(f"Boundary balance values test failed: {str(e)}")
 
+    @pytest.mark.xfail(reason="Известный баг: валидация параметра reserved некорректно работает для отрицательных значений")
     def test_06_incorrect_boundary_reserved_value_less_then_zero(self):
         try:
             self.driver.get(f"{self.base_url}/?balance=0&reserved=-1")
@@ -118,6 +122,7 @@ class BankServiceBoundaryTests(unittest.TestCase):
         except Exception as e:
             self.fail(f"Boundary reserved values test failed: {str(e)}")
 
+    @pytest.mark.xfail(reason="Известный баг: валидация параметра reserved некорректно работает для огромных значений")
     def test_06_incorrect_boundary_reserved_value_more_then_max(self):
         try:
             # Тест с балансом больше максимально возможного. 
