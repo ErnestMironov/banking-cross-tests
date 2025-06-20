@@ -29,7 +29,6 @@ class BankServiceTests(unittest.TestCase):
     def setUp(self):
         self.driver.get(f"{self.base_url}/?balance=30000&reserved=20001")
         time.sleep(2)
-        # Закрываем alert если он есть (от предыдущих тестов)
         try:
             alert = self.driver.switch_to.alert
             alert.accept()
@@ -37,15 +36,22 @@ class BankServiceTests(unittest.TestCase):
             pass
     
     def test_01_balance_display(self):
+        """TC-001: Валидация отображения баланса"""
         try:
             balance_element = self.wait.until(
-                EC.presence_of_element_located((By.XPATH, "//*[contains(text(), '30') and contains(text(), '000')]"))
+                EC.presence_of_element_located((By.XPATH, "//div[h2[text()='Рубли']]//p[contains(text(), 'На счету')]"))
             )
-            self.assertTrue(balance_element.is_displayed())
-            
-            reserved_element = self.driver.find_element(By.XPATH, "//*[contains(text(), '20') and contains(text(), '001')]")
-            self.assertTrue(reserved_element.is_displayed())
-            
+            balance_text = balance_element.text
+            balance_value = ''.join(filter(str.isdigit, balance_text))
+            self.assertEqual(balance_value, "30000")
+
+            reserved_element = self.wait.until(
+                EC.presence_of_element_located((By.XPATH, "//div[h2[text()='Рубли']]//p[contains(text(), 'Резерв')]"))
+            )
+            reserved_text = reserved_element.text
+            reserved_value = ''.join(filter(str.isdigit, reserved_text))
+            self.assertEqual(reserved_value, "20001")
+
         except Exception as e:
             self.fail(f"Balance display test failed: {str(e)}")
     
